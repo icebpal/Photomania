@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     final int REQUEST_IMAGE_CAPTURE = 1;
     final int PICK_IMAGE = 2;
     final int SHARE_IMAGE = 3;
+    String urlImage;
     private ImageView imageView;
     private StorageReference mStorageRef;
 
@@ -68,15 +69,10 @@ public class MainActivity extends AppCompatActivity {
         Button editPhoto = (Button) findViewById(R.id.editPhoto);
         editPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                imageView.buildDrawingCache();
-                Bitmap image= imageView.getDrawingCache();
-
-                Bundle extras = new Bundle();
-                extras.putParcelable("imagebitmap", image);
-
-                Intent editPhotoIntent = new Intent(MainActivity.this, EditPhotoActivity.class);
-                editPhotoIntent.putExtras(extras);
+            public void onClick(View v){
+                Context context = v.getContext();
+                Intent editPhotoIntent = new Intent(context, EditPhotoActivity.class);
+                editPhotoIntent.putExtra("urlstring", urlImage);
                 startActivity(editPhotoIntent);
             }
         });
@@ -126,6 +122,14 @@ public class MainActivity extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 imageView.setImageBitmap(selectedImage);
+                StorageReference imageRef = mStorageRef.child(imageUri.toString());
+                imageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        urlImage = downloadUrl.toString();
+                    }
+                });
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

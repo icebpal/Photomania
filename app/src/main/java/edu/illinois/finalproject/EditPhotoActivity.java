@@ -1,9 +1,10 @@
 package edu.illinois.finalproject;
 
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 public class EditPhotoActivity extends AppCompatActivity {
 
@@ -15,7 +16,11 @@ public class EditPhotoActivity extends AppCompatActivity {
         ImageView imageViewForPhotoToEdit = (ImageView) findViewById(R.id.photoToEditView);
 
         Bundle extras = getIntent().getExtras();
-        Bitmap bmp = (Bitmap) extras.getParcelable("imagebitmap");
-        imageViewForPhotoToEdit.setImageBitmap(bmp);
+        String urlForImage = extras.getString("urlstring");
+
+        Glide.with(EditPhotoActivity.this)
+                .load(urlForImage)
+                .into(imageViewForPhotoToEdit);
+
     }
 }
