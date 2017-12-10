@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,19 +27,18 @@ public class EditPhotoActivity extends AppCompatActivity {
         final ImageView imageViewForPhotoToEdit = (ImageView) findViewById(R.id.photoToEditView);
 
         Bundle extras = getIntent().getExtras();
-        String urlForImage = extras.getString("urlstring");
+        final String URL_FOR_IMAGE = extras.getString("urlstring");
 
         Glide.with(EditPhotoActivity.this)
-                .load(urlForImage)
+                .load(URL_FOR_IMAGE)
                 .into(imageViewForPhotoToEdit);
 
         Button returnPhotoToNormal = (Button) findViewById(R.id.noFilter);
         returnPhotoToNormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (originalPhoto != null) {
-                    imageViewForPhotoToEdit.setImageBitmap(originalPhoto);
-                }
+                Glide.with(EditPhotoActivity.this).load(URL_FOR_IMAGE).into(imageViewForPhotoToEdit);
+                imageViewForPhotoToEdit.clearColorFilter();
             }
         });
 
@@ -45,6 +46,58 @@ public class EditPhotoActivity extends AppCompatActivity {
         makeBlackAndWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.setSaturation(0);
+
+                ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+                imageViewForPhotoToEdit.setColorFilter(filter);
+            }
+        });
+
+        Button savePhoto = (Button) findViewById(R.id.savePhoto);
+        savePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Context context = v.getContext();
+                Intent intent = new Intent(context, MainActivity.class);
+                imageViewForPhotoToEdit.buildDrawingCache();
+                Bitmap photoToSave = imageViewForPhotoToEdit.getDrawingCache();
+
+                MediaStore.Images.Media.insertImage(getContentResolver(), photoToSave, "Photomania!" , "YourImage");
+
+                context.startActivity(intent);
+            }
+        });
+
+        Button blue = (Button) findViewById(R.id.blueFilterButton);
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewForPhotoToEdit.setColorFilter(Color.argb(140, 0, 0, 120));
+            }
+        });
+
+        Button red = (Button) findViewById(R.id.redFilterButton);
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewForPhotoToEdit.setColorFilter(Color.argb(140, 150, 0, 0));
+            }
+        });
+
+        Button purple = (Button) findViewById(R.id.purpleFilterButton);
+        purple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewForPhotoToEdit.setColorFilter(Color.argb(140, 150, 0, 150));
+            }
+        });
+
+        Button gradientFilter = (Button) findViewById(R.id.gradientFilter);
+        gradientFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewForPhotoToEdit.clearColorFilter();
                 imageViewForPhotoToEdit.buildDrawingCache();
                 originalPhoto = imageViewForPhotoToEdit.getDrawingCache();
 
@@ -77,21 +130,5 @@ public class EditPhotoActivity extends AppCompatActivity {
                 imageViewForPhotoToEdit.setImageBitmap(bmOut);
             }
         });
-
-        Button savePhoto = (Button) findViewById(R.id.savePhoto);
-        savePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Context context = v.getContext();
-                Intent intent = new Intent(context, MainActivity.class);
-                imageViewForPhotoToEdit.buildDrawingCache();
-                Bitmap photoToSave = imageViewForPhotoToEdit.getDrawingCache();
-
-                MediaStore.Images.Media.insertImage(getContentResolver(), photoToSave, "Photomania!" , "YourImage");
-
-                context.startActivity(intent);
-            }
-        });
-
     }
 }

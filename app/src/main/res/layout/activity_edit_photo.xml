@@ -47,8 +47,8 @@
         android:id="@+id/blackAndWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-6dp"
         android:text="B/W"
         app:layout_constraintLeft_toRightOf="@+id/noFilter"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,5 +62,48 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/blueFilterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-16dp"
+        android:layout_marginTop="0dp"
+        android:text="Blue"
+        app:layout_constraintLeft_toRightOf="@+id/blackAndWhite"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/gradientFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-1dp"
+        android:text="Gradient"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noFilter" />
+
+    <Button
+        android:id="@+id/redFilterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginTop="-10dp"
+        android:text="Red"
+        app:layout_constraintLeft_toRightOf="@+id/gradientFilter"
+        app:layout_constraintTop_toBottomOf="@+id/blackAndWhite" />
+
+    <Button
+        android:id="@+id/purpleFilterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginTop="-7dp"
+        android:text="purple"
+        app:layout_constraintLeft_toRightOf="@+id/redFilterButton"
+        app:layout_constraintTop_toBottomOf="@+id/blueFilterButton" />
 
 </android.support.constraint.ConstraintLayout>
