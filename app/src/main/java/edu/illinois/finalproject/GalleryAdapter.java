@@ -20,8 +20,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     private List<String> galleryPhotoList = new ArrayList<>();
 
-    private final String URL_FOR_FIRST_PHOTO = "https://firebasestorage.googleapis.com/v0/b/final-project-icebpal.appspot.com/o/content%3A%2Fcom.android.providers.media.documents%2Fdocument%2Fimage%253A119?alt=media&token=b3bc8928-af8b-496b-afc9-d363aff120b5";
-    private final String URL_FOR_SECOND_PHOTO = "https://firebasestorage.googleapis.com/v0/b/final-project-icebpal.appspot.com/o/content%3A%2Fcom.android.providers.media.documents%2Fdocument%2Fimage%253A76?alt=media&token=fc1dd957-93d1-40d3-bf7e-e9b7c3a74410";
+    GalleryAdapter(List<String> galleryPhotos) {
+        galleryPhotoList.addAll(galleryPhotos);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,21 +32,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(galleryItem);
     }
 
-    public void addGalleryPhoto(String photoURL) {
-        galleryPhotoList.add(photoURL);
-    }
-
     @Override
     public void onBindViewHolder(GalleryAdapter.ViewHolder holder, int position) {
         final String photo1 = galleryPhotoList.get(position);
-        final String photo2 = URL_FOR_SECOND_PHOTO; // galleryPhotoList.get(position + 1);
 
         Context context1 = holder.galleryPhoto1View.getContext();
-        Context context2 = holder.galleryPhoto2View.getContext();
 
         Glide.with(context1).load(photo1).into(holder.galleryPhoto1View);
-        Glide.with(context2).load(photo2).into(holder.galleryPhoto2View);
-
     }
 
     @Override
@@ -68,7 +61,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             super(itemView);
             this.itemView = itemView;
             this.galleryPhoto1View = (ImageView) itemView.findViewById(R.id.galleryImage1);
-            this.galleryPhoto2View = (ImageView) itemView.findViewById(R.id.galleryImage2);
         }
     }
 }

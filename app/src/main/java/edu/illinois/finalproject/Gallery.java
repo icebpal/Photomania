@@ -12,14 +12,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class Gallery extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-
-        final GalleryAdapter galleryAdapter = new GalleryAdapter();
 
         final RecyclerView gallery = (RecyclerView) findViewById(R.id.galleryPhotos);
 
@@ -29,9 +29,8 @@ public class Gallery extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String imageURL = (String) dataSnapshot.getValue();
-                galleryAdapter.addGalleryPhoto(imageURL);
-                Toast.makeText(getApplicationContext(), imageURL, Toast.LENGTH_SHORT).show();
+                List<String> imageURLs = (List<String>) dataSnapshot.getValue();
+                gallery.setAdapter(new GalleryAdapter(imageURLs));
             }
 
             @Override
@@ -40,7 +39,6 @@ public class Gallery extends AppCompatActivity {
             }
         });
 
-        gallery.setAdapter(galleryAdapter);
         gallery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 }

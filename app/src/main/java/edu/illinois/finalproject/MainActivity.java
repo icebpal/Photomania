@@ -11,21 +11,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -149,22 +146,11 @@ public class MainActivity extends AppCompatActivity {
                             .into(imageView);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("Picture URL");
+                    DatabaseReference myRef = database.getReference("PictureURLS");
 
-                    myRef.setValue(urlImage);
-
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String imageURL = (String) dataSnapshot.getValue();
-                            Toast.makeText(getApplicationContext(), imageURL, Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
+                    Random random = new Random();
+                    int randomNum = random.nextInt(100);
+                    myRef.child("10").setValue(urlImage);
                 }
             });
         }

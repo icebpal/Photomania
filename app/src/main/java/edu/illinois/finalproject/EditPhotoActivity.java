@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class EditPhotoActivity extends AppCompatActivity {
             }
         });
 
-        Button makeBlackAndWhite = (Button) findViewById(R.id.blackAndWhite);
+        final Button makeBlackAndWhite = (Button) findViewById(R.id.blackAndWhite);
         makeBlackAndWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +114,14 @@ public class EditPhotoActivity extends AppCompatActivity {
                     }
                 }
                 imageViewForPhotoToEdit.setImageBitmap(bmOut);
+            }
+        });
+
+        Button sepia = (Button) findViewById(R.id.sepiaFilter);
+        sepia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewForPhotoToEdit.setColorFilter(Color.argb(140, 142, 66, 20));
             }
         });
 
