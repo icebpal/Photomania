@@ -54,21 +54,6 @@ public class EditPhotoActivity extends AppCompatActivity {
             }
         });
 
-        Button savePhoto = (Button) findViewById(R.id.savePhoto);
-        savePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Context context = v.getContext();
-                Intent intent = new Intent(context, MainActivity.class);
-                imageViewForPhotoToEdit.buildDrawingCache();
-                Bitmap photoToSave = imageViewForPhotoToEdit.getDrawingCache();
-
-                MediaStore.Images.Media.insertImage(getContentResolver(), photoToSave, "Photomania!" , "YourImage");
-
-                context.startActivity(intent);
-            }
-        });
-
         Button blue = (Button) findViewById(R.id.blueFilterButton);
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +113,21 @@ public class EditPhotoActivity extends AppCompatActivity {
                     }
                 }
                 imageViewForPhotoToEdit.setImageBitmap(bmOut);
+            }
+        });
+
+        Button savePhoto = (Button) findViewById(R.id.savePhoto);
+        savePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Context context = v.getContext();
+                final Intent intent = new Intent(context, MainActivity.class);
+                imageViewForPhotoToEdit.buildDrawingCache();
+                Bitmap photoToSave = imageViewForPhotoToEdit.getDrawingCache();
+
+                MediaStore.Images.Media.insertImage(getContentResolver(), photoToSave, "Photo", "Description");
+
+                context.startActivity(intent);
             }
         });
     }

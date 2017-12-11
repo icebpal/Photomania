@@ -31,9 +31,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(galleryItem);
     }
 
+    public void addGalleryPhoto(String photoURL) {
+        galleryPhotoList.add(photoURL);
+    }
+
     @Override
     public void onBindViewHolder(GalleryAdapter.ViewHolder holder, int position) {
-        final String photo1 = URL_FOR_FIRST_PHOTO; // galleryPhotoList.get(position);
+        final String photo1 = galleryPhotoList.get(position);
         final String photo2 = URL_FOR_SECOND_PHOTO; // galleryPhotoList.get(position + 1);
 
         Context context1 = holder.galleryPhoto1View.getContext();
@@ -46,8 +50,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 4;
-//        return galleryPhotoList.size();
+        return galleryPhotoList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
