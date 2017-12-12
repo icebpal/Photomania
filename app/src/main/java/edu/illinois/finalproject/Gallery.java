@@ -14,8 +14,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+/**
+ * Gallery class for displaying all shared photos by users.
+ */
 public class Gallery extends AppCompatActivity {
 
+    /**
+     * onCreate method for the Gallery, sets up the RecyclerView with its adapter and puts all the
+     * URLs for the images to display into the adapter.
+     *
+     * @param savedInstanceState last state of the Gallery
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -24,15 +24,25 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Random;
 
+/**
+ * Main activity for the app. Allows the user to access all the primary functions: Taking photos,
+ * editing photos, sharing photos, and viewing the gallery which contains shared photos.
+ */
 public class MainActivity extends AppCompatActivity {
 
     final int REQUEST_IMAGE_CAPTURE = 1;
     final int PICK_IMAGE = 2;
     final int SHARE_IMAGE = 3;
-    String urlImage;
+    private String urlImage;
     private ImageView imageView;
     private StorageReference mStorageRef;
 
+    /**
+     * onCreate method that runs at the beginning of the app, setting up all the buttons and views
+     * for the MainActivity.
+     *
+     * @param savedInstanceState the last state of the app
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to run after the main activity ends, which in this case will be after the user has
-     * taken or uploaded a picture. Then will get that picture and display it on the screen.
+     * taken, uploaded a picture, or chosen an image to share.
+     * Then this will get that picture and display it on the screen, sharing it onto Firebase
+     * Database as well if that is what the user chose to do.
      *
      * @param requestCode code for whether it was a picture being taken or an upload
      * @param resultCode code checking that the picture was taken/uploaded successfully
@@ -149,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
                     DatabaseReference myRef = database.getReference("PictureURLS");
 
                     Random random = new Random();
-                    int randomNum = random.nextInt(100);
-                    myRef.child("10").setValue(urlImage);
+                    int randomNum = random.nextInt(10);
+                    myRef.child(Integer.toString(randomNum)).setValue(urlImage);
                 }
             });
         }
