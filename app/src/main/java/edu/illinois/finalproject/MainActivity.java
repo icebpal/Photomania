@@ -153,9 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     String urlImage = downloadUrl.toString();
 
-                    Glide.with(MainActivity.this)
-                            .load(urlImage)
-                            .into(imageView);
+                    Glide.with(MainActivity.this).load(urlImage).into(imageView);
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("PictureURLS");

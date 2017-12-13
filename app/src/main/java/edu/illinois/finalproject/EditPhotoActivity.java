@@ -147,7 +147,7 @@ public class EditPhotoActivity extends AppCompatActivity {
                 } else {
                     gray = 0;
                 }
-                // set new pixel color to output bitmap
+
                 bmOut.setPixel(x, y, Color.argb(A, gray, gray, gray));
             }
         }

@@ -116,7 +116,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="8dp"
-        android:text="Save Feature still in development! Take a screenshot of your edited photo!"
+        android:text="Take a screenshot or click the Save button to save your new photo!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/savePhoto"

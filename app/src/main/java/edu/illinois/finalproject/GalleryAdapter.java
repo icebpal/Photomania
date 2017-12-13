@@ -36,7 +36,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
      *
      * @param parent Parent ViewGroup
      * @param viewType viewType
-     * @return the new Viewholder for the RecyclerView
+     * @return the new ViewHolder for the RecyclerView
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
