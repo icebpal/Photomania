@@ -16,11 +16,13 @@ Windows requirements:
 2) 3 GB RAM minimum, 8 GB RAM recommended (plus 1 GB for the Android Emulator)
 3) 2 GB of available disk space minimum, 4 GB recommended (500 MB for IDE plus 1.5 GB for Android SDK and emulator system image)
 4) 1280 x 800 minimum screen resolution
+
 Mac OS requirements:
 1) Mac OS X 10.10 (Yosemite) or higher, up to 10.13 (High Sierra)
 2) 3 GB RAM minimum, 8 GB RAM recommended (plus 1 GB for the Android Emulator)
 3) 2 GB of available disk space minimum, 4 GB recommended (500 MB for IDE plus 1.5 GB for Android SDK and emulator system image)
 4) 1280 x 800 minimum screen resolution
+
 Linux OS requirements:
 1) GNOME or KDE desktop. Tested on Ubuntu 14.04 LTS, Trusty Tahr (64-bit distribution capable of running 32-bit applications)
 2) 64-bit distribution capable of running 32-bit applications
